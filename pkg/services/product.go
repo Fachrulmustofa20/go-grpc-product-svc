@@ -2,6 +2,7 @@ package services
 
 import (
 	"context"
+	"fmt"
 	"net/http"
 
 	"github.com/Fachrulmustofa20/go-grpc-product-svc/pkg/db"
@@ -17,6 +18,7 @@ func (s *Server) CreateProduct(ctx context.Context, req *pb.CreateProductRequest
 	var product models.Product
 
 	product.Name = req.Name
+	product.Sku = req.Sku
 	product.Stock = req.Stock
 	product.Price = req.Price
 
@@ -42,8 +44,10 @@ func (s *Server) FindOne(ctx context.Context, req *pb.FindOneRequest) (*pb.FindO
 		}, nil
 	}
 
+	fmt.Println(product)
 	data := &pb.FindOneData{
 		Id:    product.Id,
+		Sku:   product.Sku,
 		Name:  product.Name,
 		Stock: product.Stock,
 		Price: product.Price,
