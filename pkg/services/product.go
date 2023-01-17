@@ -11,6 +11,7 @@ import (
 )
 
 type Server struct {
+	pb.UnimplementedProductServiceServer
 	H db.Handler
 }
 
